@@ -1,0 +1,12 @@
+WHITESPACE = _{ " " | "\t" | "\n" }
+
+variable = @{ ASCII_ALPHANUMERIC+ } 
+
+primary = { variable | "(" ~ implication ~ ")" }
+
+not = { "NOT" ~ primary | primary } 
+and = { not ~ ("AND" ~ not)* } 
+or = { and ~ ("OR" ~ and)* } 
+implication = { or ~ ("->" ~ implication)? } 
+
+program = { SOI ~ implication ~ EOI }

@@ -1,0 +1,6 @@
+A AND B
+(A OR B) -> C
+NOT B
+B OR A 
+NOT A AND B
+X21 -> A25 AND M

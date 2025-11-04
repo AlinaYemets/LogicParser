@@ -44,21 +44,20 @@ Unit tests are placed in the tests/ directory and cover:
 - Complex nested expressions
 - Ensuring parser correctly builds the AST
 
-**Run tests with**: cargo test -- --nocapture
+**Run tests with**: `cargo test -- --nocapture`
 
 ## Main Overview
 
-`main.rs
-│
+```text
+main.rs
 ├── parse_file()
-│     ├── reads text from a file
-│     ├── calls parse_expression() from lib.rs
-│     ├── obtains the AST (Expr)
-│     ├── collect_vars() extracts all variable names
-│     ├── read_bool() prompts the user for values
-│     └── evaluate() computes the final result
-│
-└── prints the summary to the console`
+│   ├── reads text from a file
+│   ├── calls parse_expression() from lib.rs
+│   ├── obtains the AST (Expr)
+│   ├── collect_vars() extracts all variable names
+│   ├── read_bool() prompts the user for values
+│   └── evaluate() computes the final result
+└── prints the summary to the console
 
 ## How to Run
 

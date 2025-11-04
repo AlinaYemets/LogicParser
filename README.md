@@ -5,7 +5,7 @@ It allows to parse and evaluate boolean expressions with variables and logical o
 The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
 
 ## Project Structure
-
+```text
 `logic-parser/
 ├── src/
 │ ├── lib.rs # Core logic: parsing, AST structure and evaluation
@@ -14,7 +14,7 @@ The program can read an input file, automatically detect variables, ask for thei
 ├── tests/
 │ └── parser_tests.rs # Unit tests for the parser and evaluator
 ├── Cargo.toml # Dependencies and metadata
-└── README.md # Project documentation`
+└── README.md # Project documentation```
 
 ## Grammar Overview
 
@@ -47,7 +47,6 @@ Unit tests are placed in the tests/ directory and cover:
 **Run tests with**: `cargo test -- --nocapture`
 
 ## Main Overview
-
 ```text
 main.rs
 ├── parse_file()
@@ -57,7 +56,7 @@ main.rs
 │   ├── collect_vars() extracts all variable names
 │   ├── read_bool() prompts the user for values
 │   └── evaluate() computes the final result
-└── prints the summary to the console
+└── prints the summary to the console```
 
 ## How to Run
 

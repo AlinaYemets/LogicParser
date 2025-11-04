@@ -18,10 +18,10 @@ logic-parser/
 
 - **Variables** - uppercase/lowercase letters or numbers, e.g. `A`, `B`, `x1`
 - **Operators:**
-  - `NOT` - negation (highest precedence)
+  - `NOT` - negation
   - `AND` - conjunction
   - `OR` - disjunction
-  - `->` - implication (lowest precedence)
+  - `->` - implication
 - **Parentheses** - `(` and `)` for grouping expressions
 
 The grammar defines logical hierarchy of operations: not -> and -> or -> implication

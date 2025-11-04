@@ -6,7 +6,7 @@ The program can read an input file, automatically detect variables, ask for thei
 
 ## Project Structure
 ```text
-`logic-parser/
+logic-parser/
 ├── src/
 │ ├── lib.rs # Core logic: parsing, AST structure and evaluation
 │ ├── main.rs # CLI entry point that interacts with the user
@@ -14,8 +14,8 @@ The program can read an input file, automatically detect variables, ask for thei
 ├── tests/
 │ └── parser_tests.rs # Unit tests for the parser and evaluator
 ├── Cargo.toml # Dependencies and metadata
-└── README.md # Project documentation```
-
+└── README.md # Project documentation
+```
 ## Grammar Overview
 
 - **Variables** - uppercase/lowercase letters or numbers, e.g. `A`, `B`, `x1`
@@ -56,8 +56,8 @@ main.rs
 │   ├── collect_vars() extracts all variable names
 │   ├── read_bool() prompts the user for values
 │   └── evaluate() computes the final result
-└── prints the summary to the console```
-
+└── prints the summary to the console
+```
 ## How to Run
 
 - **Run the CLI:** `cargo run`

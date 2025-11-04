@@ -1,4 +1,4 @@
-# Logic Parser and Evaluator
+# Logic Parser
 
 This project is a simple **logical expression parser and evaluator** written in Rust.  
 It allows to parse and evaluate boolean expressions with variables and logical operators such as `NOT`, `AND`, `OR`, and `->`.  

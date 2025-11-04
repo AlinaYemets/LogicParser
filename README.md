@@ -6,7 +6,7 @@ The program can read an input file, automatically detect variables, ask for thei
 
 ## Project Structure
 
-logic-parser/
+`logic-parser/
 ├── src/
 │ ├── lib.rs # Core logic: parsing, AST structure and evaluation
 │ ├── main.rs # CLI entry point that interacts with the user
@@ -14,7 +14,7 @@ logic-parser/
 ├── tests/
 │ └── parser_tests.rs # Unit tests for the parser and evaluator
 ├── Cargo.toml # Dependencies and metadata
-└── README.md # Project documentation
+└── README.md # Project documentation`
 
 ## Grammar Overview
 
@@ -48,7 +48,7 @@ Unit tests are placed in the tests/ directory and cover:
 
 ## Main Overview
 
-main.rs
+`main.rs
 │
 ├── parse_file()
 │     ├── reads text from a file
@@ -58,11 +58,11 @@ main.rs
 │     ├── read_bool() prompts the user for values
 │     └── evaluate() computes the final result
 │
-└── prints the summary to the console
+└── prints the summary to the console`
 
 ## How to Run
 
-- **Run the CLI:** cargo run
-- **Parse expressions from a file:** cargo run -- parse input.txt
-- **Show help:** cargo run -- help
-- **Show project credits:** cargo run -- credits
+- **Run the CLI:** `cargo run`
+- **Parse expressions from a file:** `cargo run -- parse input.txt`
+- **Show help:** `cargo run -- help`
+- **Show project credits:** `cargo run -- credits`

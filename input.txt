@@ -1,6 +1,13 @@
+P(x) -> Q
+∃y (R(y) AND S)
+∀y S
 A AND B
 (A OR B) -> C
 NOT B
-B OR A 
+B OR A
 NOT A AND B
 X21 -> A25 AND M
+(A <-> B)
+(A AND B) <-> (B AND A)
+∃y (R(y) AND S)
+(A -> B) <-> (NOT B -> NOT A)

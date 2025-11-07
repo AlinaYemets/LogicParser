@@ -4,26 +4,25 @@ use std:: env;
 use std:: fs;
 use std:: io:: {self, Write};
 
-/// Collect all variable names from an expression
-fn collect_vars(expr: &Expr, vars: &mut Vec<String>) {
+/// Collect vars and free predicates
+fn collect_ent(expr: &Expr, vars: &mut Vec<String>, preds: &mut Vec<String>, under_quant: bool) {
     match expr {
-        Expr:: Var(name) => {
-            if !vars.contains(name) {
-                vars.push(name.clone());
-            }
-        } // checks to avoid dupl
-        Expr:: Not(e) => collect_vars(e, vars),
-        Expr:: And(l, r) | Expr:: Or(l, r) | Expr:: Implies(l, r) => {
-            collect_vars(l, vars);
-            collect_vars(r, vars);
+        Expr:: Var(name) if !vars.contains(name) => vars.push(name.clone()),
+        Expr:: Predicate(name, _) if !preds.contains(name) && !under_quant => preds.push(name.clone()),
+        Expr:: Not(e) => collect_ent(e, vars, preds, under_quant),
+        Expr:: And(l, r) | Expr:: Or(l, r) | Expr:: Implies(l, r) | Expr:: Equiv(l, r) => {
+            collect_ent(l, vars, preds, under_quant);
+            collect_ent(r, vars, preds, under_quant);
         }
+        Expr:: ForAll(_, inner) | Expr:: Exists(_, inner) => collect_ent(inner, vars, preds, true),
+        _ => {}
     }
 }
 
 /// Read a boolean value from the user
 fn read_bool(prompt: &str) -> bool {
     loop {
-        print!("{}", prompt);
+        print!("{prompt}");
         io:: stdout().flush().ok();
         let mut input = String::new();
         if io:: stdin().read_line(&mut input).is_err() { continue; }
@@ -47,17 +46,19 @@ fn parse_file(filename: &str) {
         match parse_expression(line) {
             Ok(ast) => {
                 let mut vars = Vec::new();
-                collect_vars(&ast, &mut vars);
+                let mut preds = Vec::new();
+                collect_ent(&ast, &mut vars, &mut preds, false);
 
                 let mut values: HashMap<String, bool> = HashMap::new();
-                for v in &vars {
-                    let prompt = format!("{} = (true/false, Enter = false): ", v);
+
+                for v in vars.iter().chain(preds.iter()) {
+                    let prompt = if preds.contains(v) { format!("{v}() = (true/false, Enter = false): ") }
+                                 else { format!("{v} = (true/false, Enter = false): ") };
                     values.insert(v.clone(), read_bool(&prompt));
                 }
 
                 println!("Values: {:?}", values);
-                let result = evaluate(&ast, &values);
-                println!("Result: {}", result);
+                println!("Result: {}", evaluate(&ast, &values));
             }
             Err(e) => eprintln!("Parse error: {}", e),
         }

@@ -1,11 +1,9 @@
-# Logic Parser and Evaluator
+# Logic Parser
 
-This project is a simple **logical expression parser and evaluator** written in Rust.  
-It allows to parse and evaluate boolean expressions with variables and logical operators such as `NOT`, `AND`, `OR`, and `->`.  
-The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
+This project is a simple **logical expression parser and evaluator** written in Rust. It supports **boolean and predicate logic** with variables, predicates, quantifiers like `∀`, `∃`, and logical operators like `NOT`, `AND`, `OR`, `->`, `<->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
 
 ## Project Structure
-
+```text
 logic-parser/
 ├── src/
 │ ├── lib.rs # Core logic: parsing, AST structure and evaluation
@@ -15,18 +13,23 @@ logic-parser/
 │ └── parser_tests.rs # Unit tests for the parser and evaluator
 ├── Cargo.toml # Dependencies and metadata
 └── README.md # Project documentation
-
+```
 ## Grammar Overview
 
 - **Variables** - uppercase/lowercase letters or numbers, e.g. `A`, `B`, `x1`
+- **Predicates** - functions with optional arguments, e.g. P(x), Q(x,y)
 - **Operators:**
-  - `NOT` - negation (highest precedence)
+  - `NOT` - negation
   - `AND` - conjunction
   - `OR` - disjunction
-  - `->` - implication (lowest precedence)
+  - `->` - implication
+  - `<->` - equivalence
+- **Quantifiers:**
+  - `∀x` - for all x
+  - `∃x` - exists x
 - **Parentheses** - `(` and `)` for grouping expressions
 
-The grammar defines logical hierarchy of operations: not -> and -> or -> implication
+The grammar defines logical hierarchy of operations: not -> and -> or -> implication -> equivalence
 
 ## Lib Overview
 
@@ -37,32 +40,48 @@ The grammar defines logical hierarchy of operations: not -> and -> or -> implica
 
 ## Test Overview
 
-Unit tests are placed in the tests/ directory and cover:
+Unit tests are placed in the `tests/` directory and cover:
 
-- Each logical operator (NOT, AND, OR, ->)
-- Variable evaluation
+- Variable and predicate evaluation
+- Each logical operator (`NOT`, `AND`, `OR`, `->`, `<->`)
+- Quantifiers (`∀`, `∃`) and their effect on free variables
 - Complex nested expressions
-- Ensuring parser correctly builds the AST
+- Ensuring the parser correctly builds the AST
 
-**Run tests with**: cargo test -- --nocapture
+**Run tests with**: `cargo test -- --nocapture`
 
 ## Main Overview
-
+```text
 main.rs
+├── collect_ent()
+│   ├── recursively collects all variables and free predicates from an expression
+│   └── ignores predicates under quantifiers
 │
-├── parse_file()
-│     ├── reads text from a file
-│     ├── calls parse_expression() from lib.rs
-│     ├── obtains the AST (Expr)
-│     ├── collect_vars() extracts all variable names
-│     ├── read_bool() prompts the user for values
-│     └── evaluate() computes the final result
+├── read_bool()
+│   ├── prompts the user for boolean values of variables or predicates
 │
-└── prints the summary to the console
+├── parse_file(filename)
+│   ├── reads lines from a file
+│   ├── parses each line into an AST using parse_expression()
+│   ├── collects free variables and predicates with collect_ent()
+│   ├── prompts the user for values using read_bool()
+│   └── evaluates the expression and prints the result
+│
+├── show_help()
+│   └── prints CLI usage instructions
+│
+├── show_credits()
+│   └── prints author and project information
+│
+└── main()
+    ├── reads CLI arguments
+    ├── calls parse_file(), show_help(), or show_credits() based on command
+    └── prints error if command is unknown or missing
+```
 
 ## How to Run
 
-- **Run the CLI:** cargo run
-- **Parse expressions from a file:** cargo run -- parse input.txt
-- **Show help:** cargo run -- help
-- **Show project credits:** cargo run -- credits
+- **Run the CLI:** `cargo run`
+- **Parse expressions from a file:** `cargo run parse input.txt`
+- **Show help:** `cargo run help`
+- **Show project credits:** `cargo run credits`

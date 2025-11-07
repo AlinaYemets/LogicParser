@@ -1,12 +1,19 @@
 WHITESPACE = _{ " " | "\t" | "\n" }
 
-variable = @{ ASCII_ALPHANUMERIC+ } 
+identifier = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
 
-primary = { variable | "(" ~ implication ~ ")" }
+variable = @{ identifier }
+predicate = @{ identifier ~ "(" ~ (variable ~ ("," ~ variable)*)? ~ ")" }
 
-not = { "NOT" ~ primary | primary } 
-and = { not ~ ("AND" ~ not)* } 
-or = { and ~ ("OR" ~ and)* } 
-implication = { or ~ ("->" ~ implication)? } 
+primary = { predicate | variable | "(" ~ equivalence ~ ")" | quantifier }
 
-program = { SOI ~ implication ~ EOI }
+not = { "NOT" ~ primary | primary }
+and = { not ~ ("AND" ~ not)* }
+or = { and ~ ("OR" ~ and)* }
+implication = { or ~ ("->" ~ implication)? }
+equivalence = { implication ~ ("<->" ~ equivalence)? }
+
+quantifier = { ("∀" | "∃") ~ variable ~ primary }
+
+program = { SOI ~ equivalence ~ EOI }
+

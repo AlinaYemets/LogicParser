@@ -1,5 +1,5 @@
 [package]
-name = "Logic Parser"
+name = "logic_parser"
 version = "0.1.0"
 authors = ["Alina Yemets"]
 edition = "2021"

@@ -9,5 +9,4 @@ NOT A AND B
 X21 -> A25 AND M
 (A <-> B)
 (A AND B) <-> (B AND A)
-∃y (R(y) AND S)
 (A -> B) <-> (NOT B -> NOT A)

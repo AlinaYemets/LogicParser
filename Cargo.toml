@@ -1,10 +1,9 @@
 [package]
-name = "logic-parser"
+name = "Logic Parser"
 version = "0.1.0"
 authors = ["Alina Yemets"]
 edition = "2021"
-description = "This project is a simple logical expression parser and evaluator written in Rust. It allows to parse and evaluate boolean expressions with variables and logical operators such as `NOT`, `AND`, `OR`, and `->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result."
-license = "MIT"
+description = "Logic Parser: simple logical and predicate expression parser in Rust with variables, predicates, quantifiers (∀, ∃), and operators NOT, AND, OR, ->, <->."
 
 [dependencies]
 anyhow = "1.0.100"

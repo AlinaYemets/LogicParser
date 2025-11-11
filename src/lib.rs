@@ -16,6 +16,8 @@ pub enum Expr {
     Or(Box<Expr>, Box<Expr>),
     Xor(Box<Expr>, Box<Expr>),
     Xand(Box<Expr>, Box<Expr>),
+    Nand(Box<Expr>, Box<Expr>),
+    Nor(Box<Expr>, Box<Expr>), 
     Implies(Box<Expr>, Box<Expr>),
     Equiv(Box<Expr>, Box<Expr>),
     ForAll(String, Box<Expr>),
@@ -48,6 +50,8 @@ pub fn evaluate(expr: &Expr, vars: &HashMap<String, bool>) -> bool {
         Expr:: Or(left, right) => evaluate(left, vars) || evaluate(right, vars),
         Expr:: Xor(left, right) => evaluate(left, vars) ^ evaluate(right, vars),
         Expr:: Xand(left, right) => evaluate(left, vars) && !evaluate(right, vars) || !evaluate(left, vars) && evaluate(right, vars),
+        Expr:: Nand(left, right) => !(evaluate(left, vars) && evaluate(right, vars)),
+        Expr:: Nor(left, right) => !(evaluate(left, vars) || evaluate(right, vars)),
         Expr:: Implies(left, right) => !evaluate(left, vars) || evaluate(right, vars),
         Expr:: Equiv(left, right) => evaluate(left, vars) == evaluate(right, vars),
         Expr:: ForAll(var, body) => {
@@ -124,6 +128,18 @@ fn build_ast(pair: pest:: iterators:: Pair<Rule>) -> Expr {
             let mut parts = inner.map(|p| build_ast(p));
             let first = parts.next().unwrap();
             parts.fold(first, |l, r| Expr:: Xor(Box::new(l), Box::new(r)))
+        }
+
+        Rule:: nand => {
+            let mut parts = inner.map(|p| build_ast(p));
+            let first = parts.next().unwrap();
+            parts.fold(first, |l, r| Expr:: Nand(Box::new(l), Box::new(r)))
+        }
+
+        Rule:: nor => {
+            let mut parts = inner.map(|p| build_ast(p));
+            let first = parts.next().unwrap();
+            parts.fold(first, |l, r| Expr:: Nor(Box::new(l), Box::new(r)))
         }
 
         Rule:: and => {

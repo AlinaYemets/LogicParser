@@ -1,6 +1,6 @@
 # Logic Parser
 
-This project is a simple **logical expression parser and evaluator** written in Rust. It supports **boolean and predicate logic** with variables, predicates, quantifiers like `∀`, `∃`, and logical operators like `NOT`, `AND`, `XAND, `XOR`, `OR`, `->`, `<->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
+This project is a simple **logical expression parser and evaluator** written in Rust. It supports **boolean and predicate logic** with variables, predicates, quantifiers like `∀`, `∃`, and logical operators like `NOT`, `AND`, `XAND`, `XOR`, `OR`, `->`, `<->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
 
 ## Project Structure
 ```text

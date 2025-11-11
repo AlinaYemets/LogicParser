@@ -11,7 +11,9 @@ not = { "NOT" ~ primary | primary }
 and = { not ~ ("AND" ~ not)* }
 xor = { and ~ ("XOR" ~ and)* }
 xand = { xor ~ ("XAND" ~ xor)* }
-or = { xand ~ ("OR" ~ xand)* }
+nand = { xand ~ ("NAND" ~ xand)* }
+nor = { nand ~ ("NOR" ~ nand)* }
+or = { nor ~ ("OR" ~ nor)* }
 implication = { or ~ ("->" ~ implication)? }
 equivalence = { implication ~ ("<->" ~ equivalence)? }
 

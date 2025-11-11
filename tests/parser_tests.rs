@@ -175,3 +175,24 @@ fn test_complex_mixed_expr() -> Result<()> {
     assert_eq!(evaluate(&expr, &vars), true);
     Ok(())
 }
+
+#[test]
+fn test_xor_op() -> Result<()> {
+    let expr = parse_expression("A XOR B")?;
+    let mut vars = HashMap::new();
+    vars.insert("A".into(), true);
+    vars.insert("B".into(), true);
+    assert_eq!(evaluate(&expr, &vars), false);
+    Ok(())
+}
+
+#[test]
+fn test_xand_op() -> Result<()> {
+    let expr = parse_expression("A XAND B")?;
+    let mut vars = HashMap::new();
+    vars.insert("A".into(), true);
+    vars.insert("B".into(), false);
+    assert_eq!(evaluate(&expr, &vars), true);
+    Ok(())
+}
+

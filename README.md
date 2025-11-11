@@ -1,6 +1,6 @@
 # Logic Parser
 
-This project is a simple **logical expression parser and evaluator** written in Rust. It supports **boolean and predicate logic** with variables, predicates, quantifiers like `∀`, `∃`, and logical operators like `NOT`, `AND`, `XAND`, `XOR`, `OR`, `->`, `<->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
+This project is a simple **logical expression parser and evaluator** written in Rust. It supports **boolean and predicate logic** with variables, predicates, quantifiers like `∀`, `∃`, and logical operators like `NOT`, `AND`, `XAND`, `XOR`, `NAND`, `NOR`, `OR`, `->`, `<->`. The program can read an input file, automatically detect variables, ask for their truth values, and print the result.
 
 ## Project Structure
 ```text
@@ -23,7 +23,9 @@ logic-parser/
   - `AND` - conjunction
   - `XAND` - exclusive AND
   - `OR` - disjunction
-  - `XOR` – exclusive OR
+  - `XOR` - exclusive OR
+  - `NAND` - negated AND
+  - `NOR` - negated OR
   - `->` - implication
   - `<->` - equivalence
 - **Quantifiers:**
@@ -45,7 +47,7 @@ The grammar defines logical hierarchy of operations: not -> and -> or -> implica
 Unit tests are placed in the `tests/` directory and cover:
 
 - Variable and predicate evaluation
-- Each logical operator (`NOT`, `AND`, `XAND`, `XOR`, `OR`, `->`, `<->`)
+- Each logical operator (`NOT`, `AND`, `XAND`, `XOR`, `NAND`, `NOR`, `OR`, `->`, `<->`)
 - Quantifiers (`∀`, `∃`) and their effect on free variables
 - Complex nested expressions
 - Ensuring the parser correctly builds the AST

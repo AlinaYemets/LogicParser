@@ -3,7 +3,7 @@ name = "logic_parser"
 version = "0.1.0"
 authors = ["Alina Yemets"]
 edition = "2021"
-description = "Logic Parser: simple logical and predicate expression parser in Rust with variables, predicates, quantifiers (∀, ∃), and operators NOT, AND, OR, ->, <->."
+description = "Logic Parser: simple logical and predicate expression parser in Rust with variables, predicates, quantifiers (∀, ∃), and operators NOT, AND, OR, NAND, NOR, XOR, XAND, ->, <->."
 
 [dependencies]
 anyhow = "1.0.100"

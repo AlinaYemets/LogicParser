@@ -1,3 +1,7 @@
+A NAND B
+A NOR B
+A XOR B
+A XAND B
 P(x) -> Q
 ∃y (R(y) AND S)
 ∀y S
@@ -9,4 +13,5 @@ NOT A AND B
 X21 -> A25 AND M
 (A <-> B)
 (A AND B) <-> (B AND A)
+∃y (R(y) AND S)
 (A -> B) <-> (NOT B -> NOT A)

@@ -10,11 +10,11 @@ fn collect_ent(expr: &Expr, vars: &mut Vec<String>, preds: &mut Vec<String>, und
         Expr:: Var(name) if !vars.contains(name) => vars.push(name.clone()),
         Expr:: Predicate(name, _) if !preds.contains(name) && !under_quant => preds.push(name.clone()),
         Expr:: Not(e) => collect_ent(e, vars, preds, under_quant),
-        Expr:: And(l, r) | Expr:: Or(l, r) | Expr:: Xor(l, r) | Expr:: Xand(l, r) | Expr:: Implies(l, r) | Expr:: Equiv(l, r) => {
+        Expr:: And(l, r) | Expr:: Or(l, r) | Expr:: Xor(l, r) | Expr:: Xand(l, r) | Expr:: Nand(l, r) | Expr:: Nor(l, r) | Expr:: Implies(l, r) | Expr:: Equiv(l, r) => {
             collect_ent(l, vars, preds, under_quant);
             collect_ent(r, vars, preds, under_quant);
         }
-        Expr:: ForAll(_, inner) | Expr:: Exists(_, inner) => collect_ent(inner, vars, preds, true),
+        Expr::ForAll(_, inner) | Expr::Exists(_, inner) => collect_ent(inner, vars, preds, true),
         _ => {}
     }
 }

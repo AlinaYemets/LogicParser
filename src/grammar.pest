@@ -9,7 +9,9 @@ primary = { predicate | variable | "(" ~ equivalence ~ ")" | quantifier }
 
 not = { "NOT" ~ primary | primary }
 and = { not ~ ("AND" ~ not)* }
-or = { and ~ ("OR" ~ and)* }
+xor = { and ~ ("XOR" ~ and)* }
+xand = { xor ~ ("XAND" ~ xor)* }
+or = { xand ~ ("OR" ~ xand)* }
 implication = { or ~ ("->" ~ implication)? }
 equivalence = { implication ~ ("<->" ~ equivalence)? }
 

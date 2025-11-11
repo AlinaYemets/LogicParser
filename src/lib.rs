@@ -14,6 +14,8 @@ pub enum Expr {
     Not(Box<Expr>),
     And(Box<Expr>, Box<Expr>),
     Or(Box<Expr>, Box<Expr>),
+    Xor(Box<Expr>, Box<Expr>),
+    Xand(Box<Expr>, Box<Expr>),
     Implies(Box<Expr>, Box<Expr>),
     Equiv(Box<Expr>, Box<Expr>),
     ForAll(String, Box<Expr>),
@@ -44,6 +46,8 @@ pub fn evaluate(expr: &Expr, vars: &HashMap<String, bool>) -> bool {
         Expr:: Not(inner) => !evaluate(inner, vars),
         Expr:: And(left, right) => evaluate(left, vars) && evaluate(right, vars),
         Expr:: Or(left, right) => evaluate(left, vars) || evaluate(right, vars),
+        Expr:: Xor(left, right) => evaluate(left, vars) ^ evaluate(right, vars),
+        Expr:: Xand(left, right) => evaluate(left, vars) && !evaluate(right, vars) || !evaluate(left, vars) && evaluate(right, vars),
         Expr:: Implies(left, right) => !evaluate(left, vars) || evaluate(right, vars),
         Expr:: Equiv(left, right) => evaluate(left, vars) == evaluate(right, vars),
         Expr:: ForAll(var, body) => {
@@ -108,6 +112,18 @@ fn build_ast(pair: pest:: iterators:: Pair<Rule>) -> Expr {
             let mut parts = inner.map(|p| build_ast(p));
             let first = parts.next().unwrap();
             parts.fold(first, |l, r| Expr:: Or(Box::new(l), Box::new(r)))
+        }
+
+        Rule:: xand => {
+            let mut parts = inner.map(|p| build_ast(p));
+            let first = parts.next().unwrap();
+            parts.fold(first, |l, r| Expr:: Xand(Box::new(l), Box::new(r)))
+        }
+
+        Rule:: xor => {
+            let mut parts = inner.map(|p| build_ast(p));
+            let first = parts.next().unwrap();
+            parts.fold(first, |l, r| Expr:: Xor(Box::new(l), Box::new(r)))
         }
 
         Rule:: and => {

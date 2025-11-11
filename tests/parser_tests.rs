@@ -196,3 +196,24 @@ fn test_xand_op() -> Result<()> {
     Ok(())
 }
 
+#[test]
+fn test_nand_op() -> Result<()> {
+    let expr = parse_expression("A NAND B")?;
+    let mut vars = HashMap::new();
+    vars.insert("A".into(), true);
+    vars.insert("B".into(), true);
+    assert_eq!(evaluate(&expr, &vars), false);
+    Ok(())
+}
+
+#[test]
+fn test_nor_op() -> Result<()> {
+    let expr = parse_expression("A NOR B")?;
+    let mut vars = HashMap::new();
+    vars.insert("A".into(), true);
+    vars.insert("B".into(), false);
+    assert_eq!(evaluate(&expr, &vars), false);
+
+    Ok(())
+}
+

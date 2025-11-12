@@ -33,7 +33,7 @@ logic-parser/
   - `∃x` - exists x
 - **Parentheses** - `(` and `)` for grouping expressions
 
-The grammar defines logical hierarchy of operations: not -> and -> or -> implication -> equivalence
+The grammar defines logical hierarchy of operations: NOT -> AND -> NAND -> XAND -> OR -> NOR -> XOR -> IMPLICATION -> EQUIVALENCE
 
 ## Lib Overview
 

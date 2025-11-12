@@ -8,12 +8,15 @@ predicate = @{ identifier ~ "(" ~ (variable ~ ("," ~ variable)*)? ~ ")" }
 primary = { predicate | variable | "(" ~ equivalence ~ ")" | quantifier }
 
 not = { "NOT" ~ primary | primary }
-and = { not ~ ("AND" ~ not)* }
-xor = { and ~ ("XOR" ~ and)* }
-xand = { xor ~ ("XAND" ~ xor)* }
-nand = { xand ~ ("NAND" ~ xand)* }
-nor = { nand ~ ("NOR" ~ nand)* }
-or = { nor ~ ("OR" ~ nor)* }
+
+and = { not ~ ("AND" ~ not)* } 
+nand = { and ~ ("NAND" ~ and)* } 
+xand = { nand ~ ("XAND" ~ nand)* } 
+
+or = { xand ~ ("OR" ~ xand)* } 
+nor = { or ~ ("NOR" ~ or)* } 
+xor = { nor ~ ("XOR" ~ nor)* }
+
 implication = { or ~ ("->" ~ implication)? }
 equivalence = { implication ~ ("<->" ~ equivalence)? }
 

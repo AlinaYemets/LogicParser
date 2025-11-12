@@ -17,7 +17,7 @@ or = { xand ~ ("OR" ~ xand)* }
 nor = { or ~ ("NOR" ~ or)* } 
 xor = { nor ~ ("XOR" ~ nor)* }
 
-implication = { or ~ ("->" ~ implication)? }
+implication = { xor ~ ("->" ~ implication)? }
 equivalence = { implication ~ ("<->" ~ equivalence)? }
 
 quantifier = { ("∀" | "∃") ~ variable ~ primary }
